@@ -1,4 +1,4 @@
 0-current-working- directory script prints the absolute pathway of the current working directory
 1-listit script displays the content of your current directory
 2-bring-bring-me-home script changes the working directory to the Home directory
-
+3-listfiles script displays the current content of a directoty in a long format
