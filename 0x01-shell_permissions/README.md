@@ -9,3 +9,4 @@
 7- giving everyone permission to execute
 8- giving users all permission except group and owner
 9- setting modes using octal
+10- mirror permissions of hello
