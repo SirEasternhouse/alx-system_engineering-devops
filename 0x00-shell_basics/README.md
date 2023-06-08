@@ -6,3 +6,4 @@
 5-listfilesdigitonly scrtpt displays all directory files with user group id's
 6-firstdirectory script is a script that creates a directory in the /tmp/ folder
 7-movethatfile script moves the file betty in the /tmp/ to /tmp/my-first-directory folder
+8-myfirstdelete script deletes the file betty from the /tmp/my-first-directory
