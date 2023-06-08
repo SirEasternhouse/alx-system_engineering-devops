@@ -3,3 +3,4 @@
 2-bring-bring-me-home script changes the working directory to the Home directory
 3-listfiles script displays the current content of a directoty in a long format
 4-listmorefiles script displays all directory contents ,including hidden files(starting with .) in  long format
+5-listfilesdigitonly scrtipt displays all directory files with user group id's
