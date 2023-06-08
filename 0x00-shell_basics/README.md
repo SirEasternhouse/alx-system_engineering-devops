@@ -5,3 +5,4 @@
 4-listmorefiles script displays all directory contents ,including hidden files(starting with .) in  long format
 5-listfilesdigitonly scrtpt displays all directory files with user group id's
 6-firstdirectory script is a script that creates a directory in the /tmp/ folder
+7-movethatfile script moves the file betty in the /tmp/ to /tmp/my-first-directory folder
