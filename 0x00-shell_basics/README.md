@@ -8,3 +8,4 @@
 7-movethatfile script moves the file betty in the /tmp/ to /tmp/my-first-directory folder
 8-myfirstdelete script deletes the file betty from the /tmp/my-first-directory
 9-myfirstdeltion is the deletion of the directoty created in tmp
+10-back is the script that sends you back to ypur previuod dir
