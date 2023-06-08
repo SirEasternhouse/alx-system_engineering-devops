@@ -4,3 +4,4 @@
 2-goups print all the groups the user is a part of
 3- changing owner file to betty
 4- creating an empty file called hello
+5- adding execute permission to owner group
