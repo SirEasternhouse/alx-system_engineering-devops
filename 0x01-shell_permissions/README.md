@@ -7,3 +7,4 @@
 5- adding execute permission to owner group
 6- adding permission to owner and read only to others
 7- giving everyone permission to execute
+8- giving users all permission except group and owner
