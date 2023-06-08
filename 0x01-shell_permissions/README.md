@@ -6,3 +6,4 @@
 4- creating an empty file called hello
 5- adding execute permission to owner group
 6- adding permission to owner and read only to others
+7- giving everyone permission to execute
