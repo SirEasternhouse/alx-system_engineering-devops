@@ -10,3 +10,4 @@
 9-myfirstdeltion is the deletion of the directoty created in tmp
 10-back is the script that sends you back to ypur previuod dir
 11-lists creating a lists
+12-file-type shows the type of file it is
