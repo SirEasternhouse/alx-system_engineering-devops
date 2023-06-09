@@ -1,2 +1,2 @@
 #!/bin/bash
-cp /00x0-shell_basics/.html/* alx-system_engineering-devops
+find . -maxdepth 1 -type f -name "*.html" -newer ../ -exec cp {} ../\
