@@ -1,2 +1,2 @@
 #!/bin/bash
-mkdirat welcome/ welcome/to/school
+mkdir welcome/ welcome/to/school
