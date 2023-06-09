@@ -1,2 +1,2 @@
 #!/bin/bash
-chmod -R 755 0x01-shel_permissions
+chmod -R +x 0x01-shel_permissions
