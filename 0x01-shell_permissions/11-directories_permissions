@@ -1,2 +1,2 @@
 #!/bin/bash
-chmod -R --reference=0x01-shell_permissions 11-directories_permissions
+chmod -R ugo=+x 0x01-shell_permissions
