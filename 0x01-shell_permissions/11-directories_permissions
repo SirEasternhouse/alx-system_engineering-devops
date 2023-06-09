@@ -1,2 +1,2 @@
 #!/bin/bash
-chmod -R --reference=0x01-shell_permissions dir0 dir1 dir2
+chmod --reference=0x01-shell_permissions dir0 dir1 dir2
