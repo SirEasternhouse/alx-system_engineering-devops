@@ -1,2 +1,2 @@
 #!/bin/bash
-chmod -R 755 alx-system_engineering-devops
+chmod -R u+x,go=rx 0x01-shell_permissions
