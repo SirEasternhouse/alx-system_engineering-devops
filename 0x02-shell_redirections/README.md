@@ -5,3 +5,4 @@
 4. showing the last 10 lines
 5. showing first 10lines
 6. showing 3rd line of iacta file
+7. complex filename with text inside
