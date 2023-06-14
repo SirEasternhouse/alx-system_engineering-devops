@@ -1,2 +1,2 @@
 #!/bin/bash
-echo $(ls -1) uniq -u | tr " " '\n' | sort -d
+echo $(ls) uniq -u | tr " " '\n' | sort -d
