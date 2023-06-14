@@ -1,0 +1,2 @@
+#!/bin/bash
+True_knowlegde="$((100+28))"$'\n'
