@@ -1,2 +1,2 @@
 #!/bin/bash
-echo {a..z} |tr {a..z} {z..a}
+echo Ac |tr "Ac" "Ze"
