@@ -1,2 +1,2 @@
 #!/bin/bash
-ls -1r | head
+ls -lt | tail -n +2 | head -n 10
