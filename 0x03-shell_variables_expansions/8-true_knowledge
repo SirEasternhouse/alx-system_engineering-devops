@@ -1,2 +1,2 @@
 #!/bin/bash
-True_knowlegde=$(echo "$((100+28))"$'\n')
+echo "$(($TRUEKNOWLEDGE+128))'\n'"
