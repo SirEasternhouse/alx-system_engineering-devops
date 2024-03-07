@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# This script displays "Best School" 10 x, with "Hi" on the 9th line
+
+#Initialie counter variable
+counter=0
+
+#Using the whie loop to display "Best school " 10x
+while [ $counter -lt 10 ]; do
+	if [ $counter -eq 8 ]; then
+		echo "Best School"
+		echo "Hi"
+	else
+		echo "Best School"
+	fi
+	((counter++))
+done
