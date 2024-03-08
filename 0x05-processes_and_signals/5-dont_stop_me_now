@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# This script stops the Bash script that displays "To infinity and beyond" indefinitely.
+
+# Find the PID of the script
+pid=$(pgrep -f "To infinity and beyond")
+
+# Check if the PID is found
+if [ -n "$pid" ]; then
+    # Send a termination signal to the script
+    kill "$pid"
