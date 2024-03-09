@@ -9,7 +9,7 @@ while [ $counter -le 20 ]; do
 	case $counter in 
 		4)
 	            echo $counter
-		    echo "bad luch from China"
+		    echo "bad luck from China"
 		    ;;
 		9)
 	            echo $counter
