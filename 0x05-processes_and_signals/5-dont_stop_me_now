@@ -8,3 +8,4 @@ pid=$(pgrep -f "To infinity and beyond")
 if [ -n "$pid" ]; then
     # Send a termination signal to the script
     kill "$pid"
+fi
