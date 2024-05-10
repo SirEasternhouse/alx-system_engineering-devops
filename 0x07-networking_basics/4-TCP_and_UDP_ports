@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# Bash script that displays listening ports
 ss -tnlp | awk '
 BEGIN {
   print "Active Internet connections (only servers)"
