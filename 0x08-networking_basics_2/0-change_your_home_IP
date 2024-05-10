@@ -1,0 +1,67 @@
+#!/usr/bin/env bash
+#script that configures an Ubuntu servers
+# File to modify
+HOSTS_FILE="/etc/hosts"
+
+# Check for sudo/root privileges
+if [ "$(id -u)" -ne 0 ]; then
+    echo "This script must be run with root privileges (use sudo)."
+    exit 1
+fi
+
+# Backup the current /etc/hosts file
+BACKUP_FILE="/etc/hosts.bak"
+if [ ! -f "$BACKUP_FILE" ]; then
+    sudo cp "$HOSTS_FILE" "$BACKUP_FILE"
+    echo "Backup of /etc/hosts created at $BACKUP_FILE"
+else
+    echo "Backup already exists at $BACKUP_FILE"
+fi
+
+# Make a copy of the /etc/hosts file for editing
+HOSTS_NEW_FILE="$HOME/hosts.new"
+sudo cp "$HOSTS_FILE" "$HOSTS_NEW_FILE" || {
+    echo "Error: Could not create $HOSTS_NEW_FILE from $HOSTS_FILE"
+    exit 1
+}
+
+# Clean up any '172.*' entries from ~/hosts.new
+sed -i '/^172.*$/d' "$HOSTS_NEW_FILE" || {
+    echo "Error: Failed to clean 172.* entries from $HOSTS_NEW_FILE"
+    exit 1
+}
+
+# Function to add or update a host entry in the new hosts file
+add_or_update_host() {
+    local ip_address="$1"
+    local hostname="$2"
+    if grep -q "$hostname" "$HOSTS_NEW_FILE"; then
+        # If the hostname exists, update it with the new IP address
+        sudo sed -i "s/.*$hostname/$ip_address $hostname/" "$HOSTS_NEW_FILE" || {
+            echo "Error: Failed to update $hostname"
+            exit 1
+        }
+        echo "Updated $hostname to resolve to $ip_address"
+    else
+        # If the hostname doesn't exist, add it to the file
+        echo "$ip_address $hostname" | sudo tee -a "$HOSTS_NEW_FILE" > /dev/null || {
+            echo "Error: Failed to add $hostname"
+            exit 1
+        }
+        echo "Added $hostname to resolve to $ip_address"
+    fi
+}
+
+# Configure localhost to resolve to 127.0.0.2
+add_or_update_host "127.0.0.2" "localhost"
+
+# Configure facebook.com to resolve to 8.8.8.8
+add_or_update_host "8.8.8.8" "facebook.com"
+
+# Replace the original /etc/hosts with the updated version
+sudo cp -f "$HOSTS_NEW_FILE" "$HOSTS_FILE" || {
+    echo "Error: Failed to replace $HOSTS_FILE with $HOSTS_NEW_FILE"
+    exit 1
+}
+
+echo "Successfully updated /etc/hosts with the new configuration."
