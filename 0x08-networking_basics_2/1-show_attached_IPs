@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# getting all the active Ip's
 get_active_ips() {
     ip -4 addr show | awk '/inet / && $2 !~ /^127/ { split($2, arr, "/"); print arr[1] }'
 }
