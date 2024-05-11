@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 def parse_message(input)
-  regex = /(?<sender>\S+),(?<receiver>\S+),(?<flags>[A-Z]+)/
+  regex = /\[from:(?<sender>[^\]]+)\] \[to:(?<receiver>[^\]]+)\] \[flags:(?<flags>[^\]]+)\]/
   match_data = input.match(regex)
   
   if match_data
@@ -9,9 +9,8 @@ def parse_message(input)
     receiver = match_data[:receiver]
     flags = match_data[:flags]
     
-    puts "Sender: #{sender}"
-    puts "Receiver: #{receiver}"
-    puts "Flags: #{flags}"
+    output = "#{sender},#{receiver},#{flags}"
+    puts output
   else
     puts "No match found in the input."
   end
