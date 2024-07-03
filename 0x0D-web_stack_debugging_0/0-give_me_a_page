@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# This script installs Apache, starts the Apache service, and serves a page containing "Hello Holberton" when querying the root of the container.
+
+# Start Apache service
+service apache2 start
+
+# Create an HTML file with the content "Hello Holberton"
+echo "<html><head><title>Hello Holberton</title></head><body><h1>Hello Holberton</h1></body></html>" > /var/www/html/index.html
+
+# Restart Apache service to ensure changes are applied
+service apache2 restart
+
