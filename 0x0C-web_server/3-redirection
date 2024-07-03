@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# This script installs Nginx, sets it to listen on port 80, serves a Hello World! page, and configures a 301 redirect
+
+# Update package list and install Nginx
+sudo apt update
+sudo apt install nginx -y
+
+# Create the Hello World! HTML file
+echo "Hello World!" | sudo tee /var/www/html/index.html
+
+# Ensure Nginx is listening on port 80
+sudo sed -i 's/listen 80 default_server;/listen 80;/' /etc/nginx/sites-available/default
+
+# Configure the 301 redirect
+sudo sed -i '/server_name _;/a\\n    location /redirect_me {\n        return 301 http://example.com;\n    }\n' /etc/nginx/sites-available/default
+
+# Start Nginx using the service command (since systemctl is not allowed)
+sudo service nginx start
+
+# Reload Nginx to apply the changes without using systemctl
+sudo nginx -s reload
