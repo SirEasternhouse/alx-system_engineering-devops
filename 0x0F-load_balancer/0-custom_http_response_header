@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# This script installs Nginx and configures it to include a custom HTTP header
+
+# Install Nginx
+sudo apt-get update
+sudo apt-get install -y nginx
+
+# Add custom header configuration to Nginx
+sudo bash -c 'echo -e "\n# Add custom header\nserver {\n    listen 80 default_server;\n    listen [::]:80 default_server;\n    add_header X-Served-By $hostname;\n}" >> /etc/nginx/sites-available/default'
+
+# Restart Nginx to apply changes
+sudo systemctl restart nginx
+
