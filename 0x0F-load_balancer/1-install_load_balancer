@@ -1,18 +1,16 @@
 #!/usr/bin/env bash
-# This script installs and configures HAProxy on lb-01 to distribute traffic to web-01 and web-02
+# This script installs and configures HAProxy to send traffic to web-01 and web-02 using a roundrobin algorithm
 
 # Variables
-WEB01="437360-web-01"
-WEB02="437360-web-02"
-WEB01_IP="54.84.14.15"
-WEB02_IP="35.153.33.126"
+STUDENT_ID="437360"
 
 # Update package list and install HAProxy
-sudo apt-get update
-sudo apt-get install -y haproxy
+sudo apt update
+sudo apt install haproxy -y
 
 # Configure HAProxy
-sudo bash -c "cat > /etc/haproxy/haproxy.cfg << 'EOF'
+sudo tee /etc/haproxy/haproxy.cfg > /dev/null <<EOL
+# Global settings
 global
     log /dev/log    local0
     log /dev/log    local1 notice
@@ -23,22 +21,15 @@ global
     group haproxy
     daemon
 
-    # Default SSL material locations
-    ca-base /etc/ssl/certs
-    crt-base /etc/ssl/private
-
-    # See: https://ssl-config.mozilla.org/#server=haproxy&version=2.0.20&config=intermediate&openssl=1.1.1
-    ssl-default-bind-ciphers PROFILE=SYSTEM
-    ssl-default-bind-options no-sslv3
-
+# Default settings
 defaults
     log     global
     mode    http
     option  httplog
     option  dontlognull
-    timeout connect 5000
-    timeout client  50000
-    timeout server  50000
+    timeout connect 5000ms
+    timeout client  50000ms
+    timeout server  50000ms
     errorfile 400 /etc/haproxy/errors/400.http
     errorfile 403 /etc/haproxy/errors/403.http
     errorfile 408 /etc/haproxy/errors/408.http
@@ -47,15 +38,31 @@ defaults
     errorfile 503 /etc/haproxy/errors/503.http
     errorfile 504 /etc/haproxy/errors/504.http
 
+# Frontend configuration
 frontend http_front
     bind *:80
     default_backend http_back
 
+# Backend configuration
 backend http_back
     balance roundrobin
-    server $WEB01 $WEB01_IP:80 check
-    server $WEB02 $WEB02_IP:80 check
-EOF"
+    server ${STUDENT_ID}-web-01 54.84.14.15:80 check
+    server ${STUDENT_ID}-web-02 35.153.33.126:80 check
 
-# Restart HAProxy to apply changes
-sudo restart haproxy
+# Enable HAProxy statistics page
+listen stats
+    bind *:8080
+    stats enable
+    stats uri /stats
+    stats refresh 10s
+    stats auth admin:admin
+EOL
+
+# Restart HAProxy to apply the new configuration
+sudo service haproxy restart
+
+# Ensure HAProxy can be managed via an init script
+sudo update-rc.d haproxy defaults
+
+# Output the current HAProxy configuration for verification
+cat /etc/haproxy/haproxy.cfg
