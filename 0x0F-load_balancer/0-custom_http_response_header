@@ -1,13 +1,24 @@
 #!/usr/bin/env bash
-# This script installs Nginx and configures it to include a custom HTTP header
+# This script installs Nginx and configures it to include a custom HTTP response header with the hostname of the server
 
-# Install Nginx
-sudo apt-get update
-sudo apt-get install -y nginx
+# Update package list and install Nginx
+sudo apt update
+sudo apt install nginx -y
 
-# Add custom header configuration to Nginx
-sudo bash -c 'echo -e "\n# Add custom header\nserver {\n    listen 80 default_server;\n    listen [::]:80 default_server;\n    add_header X-Served-By $hostname;\n}" >> /etc/nginx/sites-available/default'
+# Create the Hello World! HTML file
+echo "Hello World!" | sudo tee /var/www/html/index.html
 
-# Restart Nginx to apply changes
-sudo systemctl restart nginx
+# Ensure Nginx is listening on port 80
+sudo sed -i 's/listen 80 default_server;/listen 80;/' /etc/nginx/sites-available/default
 
+# Add custom header to include the hostname of the server
+sudo sed -i '/server_name _;/a\\n    add_header X-Served-By \"$hostname\";\n' /etc/nginx/sites-available/default
+
+# Start Nginx using the service command (since systemctl is not allowed)
+sudo service nginx start
+
+# Reload Nginx to apply the changes without using systemctl
+sudo nginx -s reload
+
+# Verify the setup by checking the response headers
+curl -I http://localhost | grep "X-Served-By"
