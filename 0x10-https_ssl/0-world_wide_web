@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+# This script displays information about subdomains
+
+# Function to get subdomain information
+get_subdomain_info() {
+    local domain=$1
+    local subdomain=$2
+    local full_domain="$subdomain.$domain"
+    
+    # Perform DNS query and extract record type and destination using awk
+    result=$(dig +short "$full_domain" ANY)
+    
+    if [ -z "$result" ]; then
+        echo "The subdomain $subdomain does not exist."
+    else
+        record_type=$(dig "$full_domain" ANY +noall +answer | awk '{print $4}' | head -n 1)
+        destination=$(dig "$full_domain" ANY +noall +answer | awk '{print $5}' | head -n 1)
+        echo "The subdomain $subdomain is a $record_type record and points to $destination"
+    fi
+}
+
+# Check if the domain argument is provided
+if [ -z "$1" ]; then
+    echo "Usage: $0 <domain> [subdomain]"
+    exit 1
+fi
+
+# Assign domain and subdomain arguments
+domain=$1
+subdomain=$2
+
+# If no subdomain is provided, check default subdomains
+if [ -z "$subdomain" ]; then
+    for sub in www lb-01 web-01 web-02; do
+        get_subdomain_info "$domain" "$sub"
+    done
+else
+    get_subdomain_info "$domain" "$subdomain"
+fi
