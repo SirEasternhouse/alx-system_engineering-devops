@@ -25,6 +25,9 @@ EOF
 # Ensure the default configuration is enabled
 ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
 
+# Create a simple index.html to serve
+echo "<html><body><h1>Welcome to Nginx!</h1></body></html>" > /var/www/html/index.html
+
 # Restart Nginx to apply changes
 service nginx restart
 
