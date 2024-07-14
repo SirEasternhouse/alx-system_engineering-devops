@@ -1,0 +1,29 @@
+Get:1 http://security.ubuntu.com/ubuntu focal-security InRelease [128 kB]
+Hit:2 http://archive.ubuntu.com/ubuntu focal InRelease
+Hit:3 http://ppa.launchpad.net/brightbox/ruby-ng/ubuntu focal InRelease
+Get:4 http://archive.ubuntu.com/ubuntu focal-updates InRelease [128 kB]
+Get:5 https://download.docker.com/linux/ubuntu focal InRelease [57.7 kB]
+Hit:6 http://archive.ubuntu.com/ubuntu focal-backports InRelease
+Get:7 http://security.ubuntu.com/ubuntu focal-security/universe amd64 Packages [1,245 kB]
+Get:8 http://security.ubuntu.com/ubuntu focal-security/restricted amd64 Packages [3,745 kB]
+Get:9 http://security.ubuntu.com/ubuntu focal-security/main amd64 Packages [3,776 kB]
+Get:10 http://archive.ubuntu.com/ubuntu focal-updates/universe amd64 Packages [1,530 kB]
+Get:11 http://archive.ubuntu.com/ubuntu focal-updates/restricted amd64 Packages [3,895 kB]
+Get:12 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 Packages [4,245 kB]
+Fetched 18.7 MB in 22s (853 kB/s)
+Reading package lists...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+curl is already the newest version (7.68.0-1ubuntu2.22).
+nginx is already the newest version (1.18.0-0ubuntu1.4).
+The following packages were automatically installed and are no longer required:
+  bridge-utils dns-root-data dnsmasq-base ubuntu-fan
+Use 'apt autoremove' to remove them.
+0 upgraded, 0 newly installed, 0 to remove and 50 not upgraded.
+ * Restarting nginx nginx
+   ...done.
+Synchronizing state of nginx.service with SysV service script with /lib/systemd/systemd-sysv-install.
+Executing: /lib/systemd/systemd-sysv-install enable nginx
+./0-nginx_likes_port_80: line 35: ufw: command not found
+Nginx is configured to listen on port 80 for all active IPv4 IPs and is running.
