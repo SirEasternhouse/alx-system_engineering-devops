@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Install nginx and configure to serve a simple web page
-apt-get update
-apt-get -y install nginx
-echo "<html><body><h1>Welcome to Nginx!</h1></body></html>" > /var/www/html/index.html
-systemctl start nginx
+sudo apt-get update
+sudo apt-get -y install nginx
+echo "<html><body><h1>Welcome to Nginx!</h1></body></html>" | sudo tee /var/www/html/index.html > /dev/null
+sudo systemctl is-active --quiet nginx || sudo systemctl start nginx
