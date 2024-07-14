@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# Setting up server to curl port 80 with no issues
+
+apt-get update
+apt-get -y install nginx
+echo "<html><body><h1>Welcome to Nginx!</h1></body></html>" > /var/www/html/index.html
+systemctl start nginx
+ufw allow 80/tcp
