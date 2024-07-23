@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+# This script configures Nginx to run as the nginx user and listen on port 8080.
+
+# Update package list and install Nginx if not already installed
+apt-get update
+apt-get install -y nginx
+
+# Create the nginx user if it doesn't exist
+if ! id -u nginx >/dev/null 2>&1; then
+  useradd -r -d /var/www -s /sbin/nologin nginx
+fi
+
+# Modify Nginx configuration to run as nginx user and listen on port 8080
+NGINX_CONF="/etc/nginx/nginx.conf"
+DEFAULT_CONF="/etc/nginx/sites-available/default"
+
+# Backup the original configuration files
+cp "$NGINX_CONF" "$NGINX_CONF.bak"
+cp "$DEFAULT_CONF" "$DEFAULT_CONF.bak"
+
+# Update Nginx configuration to run as nginx user
+sed -i 's/user .*/user nginx;/g' "$NGINX_CONF"
+
+# Update default site configuration to listen on port 8080
+sed -i 's/listen 80 default_server;/listen 8080 default_server;/g' "$DEFAULT_CONF"
+sed -i 's/listen [::]:80 default_server;/listen [::]:8080 default_server;/g' "$DEFAULT_CONF"
+
+# Restart Nginx to apply changes
+service nginx restart
+
+# Check the status of Nginx to ensure it is running as expected
+service nginx status
