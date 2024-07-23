@@ -27,6 +27,3 @@ sed -i 's/listen [::]:80 default_server;/listen [::]:8080 default_server;/g' "$D
 
 # Restart Nginx to apply changes
 service nginx restart
-
-# Check the status of Nginx to ensure it is running as expected
-service nginx status
