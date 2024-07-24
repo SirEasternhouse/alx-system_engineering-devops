@@ -25,5 +25,16 @@ sed -i 's/user .*/user nginx;/g' "$NGINX_CONF"
 sed -i 's/listen 80 default_server;/listen 8080 default_server;/g' "$DEFAULT_CONF"
 sed -i 's/listen [::]:80 default_server;/listen [::]:8080 default_server;/g' "$DEFAULT_CONF"
 
+# Adjust file permissions for Nginx to allow running as non-root
+chown -R nginx:nginx /var/lib/nginx
+chown -R nginx:nginx /var/log/nginx
+chown -R nginx:nginx /var/www
+
+# Ensure Nginx can bind to non-privileged ports
+setcap 'cap_net_bind_service=+ep' /usr/sbin/nginx
+
 # Restart Nginx to apply changes
 service nginx restart
+
+# Check the status of Nginx to ensure it is running as expected
+service nginx status
