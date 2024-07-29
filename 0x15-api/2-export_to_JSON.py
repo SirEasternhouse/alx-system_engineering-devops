@@ -39,6 +39,7 @@ def get_employee_todo_progress(emp_id):
     with open(json_filename, mode='w', encoding='utf-8') as json_file:
         json.dump(json_data, json_file)
 
+
 if __name__ == "__main__":
     # Ensuring a valid employee ID is provided
     if len(sys.argv) != 2 or not sys.argv[1].isdigit():
