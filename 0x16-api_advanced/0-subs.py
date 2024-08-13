@@ -1,7 +1,9 @@
 #!/usr/bin/python3
 """ Queyries the Reddit API and returns the number of subscribers"""
 
+
 import requests
+
 
 def number_of_subscribers(subreddit):
     """
@@ -17,7 +19,7 @@ def number_of_subscribers(subreddit):
     """
     # Base URL for the Reddit API subreddit endpoint
     url = f"https://www.reddit.com/r/{subreddit}/about.json"
-    
+
     # Set up the headers to mimic a browser request
     headers = {'User-Agent': 'Mozilla/5.0'}
 
